@@ -8,7 +8,7 @@
       <link href="/2024/07/12/%E3%80%90Nginx%E3%80%91%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8C%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%9A%84%E9%85%8D%E7%BD%AE/"/>
       <url>/2024/07/12/%E3%80%90Nginx%E3%80%91%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8C%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%9A%84%E9%85%8D%E7%BD%AE/</url>
       
-        <content type="html"><![CDATA[<h1 id="【Nginx】反向代理和负载均衡的配置"><a href="#【Nginx】反向代理和负载均衡的配置" class="headerlink" title="【Nginx】反向代理和负载均衡的配置"></a>【Nginx】反向代理和负载均衡的配置</h1><h2 id="一、反向代理"><a href="#一、反向代理" class="headerlink" title="一、反向代理"></a>一、反向代理</h2><p>配置文件位置：nginx&#x2F;conf&#x2F;nginx.conf</p><p>配置方式：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /api/ &#123;</span><br><span class="line">proxy_pass   http://localhost:8080/admin/;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure><p>如上段代码，通过反向代理，将包含api的请求全部发送到后端对应的地址：<a href="http://localhost:8080/admin/">http://localhost:8080/admin/</a></p><p>我们也可以把后端对应的ip地址和端口号改为webservers,这样可以方便我们配置负载均衡。</p><h2 id="二、负载均衡"><a href="#二、负载均衡" class="headerlink" title="二、负载均衡"></a>二、负载均衡</h2><p>配置方式：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upstream webservers&#123;</span><br><span class="line">  server 192.168.200.135:8080 weight=90 ;</span><br><span class="line">  server 192.168.200.137:8088 weight=10 ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>后面的weight是计算的权重，通过权重值将前端的请求向不同的后端发送</p><p>除了权重配置负载均衡，还有其他方式：</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407121104636.png" alt="image-20240301160404229"></p>]]></content>
+        <content type="html"><![CDATA[<h2 id="一、反向代理"><a href="#一、反向代理" class="headerlink" title="一、反向代理"></a>一、反向代理</h2><p>配置文件位置：nginx&#x2F;conf&#x2F;nginx.conf</p><p>配置方式：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /api/ &#123;</span><br><span class="line">proxy_pass   http://localhost:8080/admin/;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure><p>如上段代码，通过反向代理，将包含api的请求全部发送到后端对应的地址：<a href="http://localhost:8080/admin/">http://localhost:8080/admin/</a></p><p>我们也可以把后端对应的ip地址和端口号改为webservers,这样可以方便我们配置负载均衡。</p><h2 id="二、负载均衡"><a href="#二、负载均衡" class="headerlink" title="二、负载均衡"></a>二、负载均衡</h2><p>配置方式：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upstream webservers&#123;</span><br><span class="line">  server 192.168.200.135:8080 weight=90 ;</span><br><span class="line">  server 192.168.200.137:8088 weight=10 ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>后面的weight是计算的权重，通过权重值将前端的请求向不同的后端发送</p><p>除了权重配置负载均衡，还有其他方式：</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407121104636.png" alt="image-20240301160404229"></p>]]></content>
       
       
       
@@ -27,9 +27,34 @@
     
     
     <entry>
+      <title>【Linux】Ubuntu配置SSH服务</title>
+      <link href="/2023/12/02/%E3%80%90Linux%E3%80%91Ubuntu%E9%85%8D%E7%BD%AESSH%E6%9C%8D%E5%8A%A1/"/>
+      <url>/2023/12/02/%E3%80%90Linux%E3%80%91Ubuntu%E9%85%8D%E7%BD%AESSH%E6%9C%8D%E5%8A%A1/</url>
+      
+        <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要在Ubuntu上配置SSH服务，首先安装ssh-server</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install openssh-server</span><br></pre></td></tr></table></figure><p>&nbsp; &nbsp; &nbsp; &nbsp; 安装完成后，可以检查一下是否安装成功</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status ssh</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure><p>&nbsp; &nbsp; &nbsp; &nbsp; 此时ubuntu就可以被远程连接工具连接了，如果我们想配置关于SCP服务允许传输root用户的文件，需要修改以下配置文件</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407121645327.png"></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修改后重启ssh服务，即可发送root用户的文件</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> 运维 </tag>
+            
+            <tag> 服务器 </tag>
+            
+            <tag> Ubuntu </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Linux】Ubuntu添加root用户</title>
-      <link href="/2024/01/17/%E3%80%90Linux%E3%80%91Ubuntu%E6%B7%BB%E5%8A%A0root%E7%94%A8%E6%88%B7/"/>
-      <url>/2024/01/17/%E3%80%90Linux%E3%80%91Ubuntu%E6%B7%BB%E5%8A%A0root%E7%94%A8%E6%88%B7/</url>
+      <link href="/2023/12/02/%E3%80%90Linux%E3%80%91Ubuntu%E6%B7%BB%E5%8A%A0root%E7%94%A8%E6%88%B7/"/>
+      <url>/2023/12/02/%E3%80%90Linux%E3%80%91Ubuntu%E6%B7%BB%E5%8A%A0root%E7%94%A8%E6%88%B7/</url>
       
         <content type="html"><![CDATA[<p>在Ubuntu中，默认情况下是禁用了root用户的登录。如果仍然想要启用root用户，并设置root用户的密码，应按照以下步骤进行操作：</p><p>一、输入sudo passwd root设置root用户密码</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407121100975.png"></p><p>二、切换root用户</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo -i</span><br><span class="line">su root</span><br></pre></td></tr></table></figure><p>这两条命令均可却换至root用户</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407121100976.png"></p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407121100977.png"></p>]]></content>
       
@@ -39,11 +64,86 @@
             
             <tag> Linux </tag>
             
+            <tag> 运维 </tag>
+            
+            <tag> 服务器 </tag>
+            
             <tag> Ubuntu </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Linux】tree命令的独特用法</title>
+      <link href="/2023/11/10/%E3%80%90Linux%E3%80%91tree%E5%91%BD%E4%BB%A4%E7%9A%84%E7%8B%AC%E7%89%B9%E7%94%A8%E6%B3%95/"/>
+      <url>/2023/11/10/%E3%80%90Linux%E3%80%91tree%E5%91%BD%E4%BB%A4%E7%9A%84%E7%8B%AC%E7%89%B9%E7%94%A8%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;有关tree命令，我们只知道它可以将文件目录以树状图的形式展示，但其实还有很多有意思的功能可以使用。</p><h2 id="一、tree命令的安装"><a href="#一、tree命令的安装" class="headerlink" title="一、tree命令的安装"></a>一、tree命令的安装</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;各linux版本不同，但软件包名字就叫tree，直接安装即可</p><p>ubuntu：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install tree</span><br></pre></td></tr></table></figure><p>centos：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install tree</span><br></pre></td></tr></table></figure><h2 id="二、独特技巧"><a href="#二、独特技巧" class="headerlink" title="二、独特技巧"></a>二、独特技巧</h2><h3 id="1-指定目录深度"><a href="#1-指定目录深度" class="headerlink" title="1.指定目录深度"></a>1.指定目录深度</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过使用-L标志，你可以指定你想要查看的目录的深度。例如，tree -L 2将只显示两层的目录结构。可以避免目录过深的文件影响查阅。</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407121654766.png"></p><h3 id="2-按文件大小排序："><a href="#2-按文件大小排序：" class="headerlink" title="2.按文件大小排序："></a>2.按文件大小排序：</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tree可以按文件大小进行排序。你可以使用-s标志来实现这个功能。例如，tree -s将按文件大小排序结果。</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407121654767.png"></p><h3 id="3-显示隐藏文件："><a href="#3-显示隐藏文件：" class="headerlink" title="3.显示隐藏文件："></a>3.显示隐藏文件：</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;默认情况下，tree不显示隐藏文件（即以.开头的文件）。如果你想要查看隐藏文件，可以使用-a标志。例如，tree -a将显示所有文件，包括隐藏文件。</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407121654768.png"></p><h3 id="4-按修改时间排序-："><a href="#4-按修改时间排序-：" class="headerlink" title="4.按修改时间排序 ："></a>4.按修改时间排序 ：</h3><p>&nbsp; &nbsp; &nbsp; &nbsp; 找不到刚修改过的文件？使用-t标志，你可以按照文件或目录的最后修改时间进行排序。</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407121654769.png"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
             
             <tag> 运维 </tag>
             
             <tag> 服务器 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Linux】解决缓存锁问题：无法获得锁 /var/lib/dpkg/lock-frontend</title>
+      <link href="/2023/10/27/%E3%80%90Linux%E3%80%91%E8%A7%A3%E5%86%B3%E7%BC%93%E5%AD%98%E9%94%81%E9%97%AE%E9%A2%98%EF%BC%9A%E6%97%A0%E6%B3%95%E8%8E%B7%E5%BE%97%E9%94%81lock-frontend/"/>
+      <url>/2023/10/27/%E3%80%90Linux%E3%80%91%E8%A7%A3%E5%86%B3%E7%BC%93%E5%AD%98%E9%94%81%E9%97%AE%E9%A2%98%EF%BC%9A%E6%97%A0%E6%B3%95%E8%8E%B7%E5%BE%97%E9%94%81lock-frontend/</url>
+      
+        <content type="html"><![CDATA[<p>今天在运行apt-get update更新后，突然发现安装新的软件出现了这个报错：正在等待缓存锁：无法获得锁 &#x2F;var&#x2F;lib&#x2F;dpkg&#x2F;lock-frontend。锁正由进程 1855（unattended-upgr）持有。如图。<img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407121640448.png"></p><p>这个错误通常是由于其他进程正在使用APT<a href="https://so.csdn.net/so/search?q=%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8&spm=1001.2101.3001.7020">包管理器</a>而导致的。在你的情况下，进程1855（unattended-upgr）正在持有APT的锁。这是因为系统正在进行软件更新或升级。在进行这些操作时，APT会锁定相关文件以防止多个进程同时修改它们，以确保系统的稳定性和一致性。</p><p>所以一共有以下几种方法：</p><p>1.等待一会即可：让进程1855完成其任务并释放APT锁。然后再次尝试安装，就在我写完这篇博客时，我再次安装发现已经没有问题了…</p><p>2.<a href="https://so.csdn.net/so/search?q=%E6%9D%80%E6%AD%BB%E8%BF%9B%E7%A8%8B&spm=1001.2101.3001.7020">杀死进程</a>1855：sudo kill 1855。简单粗暴的方法…</p><p>3.清除锁文件：手动清除，手动清除APT的锁文件。运行以下命令</p><pre><code>sudo rm /var/lib/dpkg/lock-frontendsudo rm /var/cache/apt/archives/lock</code></pre><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407121644607.png"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> 运维 </tag>
+            
+            <tag> 服务器 </tag>
+            
+            <tag> Ubuntu </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Linux】Ubuntu升级nodejs版本</title>
+      <link href="/2023/10/25/%E3%80%90Linux%E3%80%91Ubuntu%E5%8D%87%E7%BA%A7nodejs%E7%89%88%E6%9C%AC/"/>
+      <url>/2023/10/25/%E3%80%90Linux%E3%80%91Ubuntu%E5%8D%87%E7%BA%A7nodejs%E7%89%88%E6%9C%AC/</url>
+      
+        <content type="html"><![CDATA[<p>&nbsp; &nbsp; &nbsp; &nbsp; 在下载nvm对nodejs版本进行管理时，由于网络因素一直下载失败，于是采用了新的方法对nodejs版本进行升级。</p><p>&nbsp; &nbsp; &nbsp; &nbsp; 首先我们先查询一下现存的nodejs版本号，发现是12</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407121646171.png"></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们下载一个名为n的软件包，n 是一个非常方便的 Node.js 版本管理工具，类似于 Ruby 的 rvm 或 Python 的 pyenv。它可以帮助你在同一台机器上轻松切换和管理多个 Node.js 版本。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在下载n之前，我们需要安装npm。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install npm</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407121647183.png"></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装时若出现此问题，只需运行apt-get update更新软件包后重新安装即可&nbsp;</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407121650463.png"></p><p>&nbsp; &nbsp; &nbsp; &nbsp; 现在安装n&nbsp;</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install n -g</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407121647141.png"></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装完成后，我们可以对nodejs版本进行管理</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 升级到最新的稳定版本</span><br><span class="line">sudo n stable</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407121648433.png"></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自动为我安装了node-v20.9.0版本</p><p>&nbsp; &nbsp; &nbsp; &nbsp; 安装完成后如果显示仍然为之前版本，使用hash -r后再次查询即可<img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407121648602.png"></p><p>&nbsp; &nbsp; &nbsp; &nbsp; 当然也可以自己选择版本安装，比如我想安装一个远古版本的nodejs8.17.0</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo n <span class="number">8</span></span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407121648603.png"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> 运维 </tag>
+            
+            <tag> 服务器 </tag>
+            
+            <tag> Ubuntu </tag>
+            
+            <tag> node.js </tag>
             
         </tags>
       
@@ -62,13 +162,13 @@
       
         <tags>
             
-            <tag> FISCO BCOS </tag>
-            
-            <tag> 区块链 </tag>
-            
             <tag> Linux </tag>
             
             <tag> Ubuntu </tag>
+            
+            <tag> FISCO BCOS </tag>
+            
+            <tag> 区块链 </tag>
             
         </tags>
       
