@@ -39,11 +39,11 @@
             
             <tag> Linux </tag>
             
+            <tag> Ubuntu </tag>
+            
             <tag> 运维 </tag>
             
             <tag> 服务器 </tag>
-            
-            <tag> Ubuntu </tag>
             
         </tags>
       
@@ -64,11 +64,11 @@
             
             <tag> Linux </tag>
             
+            <tag> Ubuntu </tag>
+            
             <tag> 运维 </tag>
             
             <tag> 服务器 </tag>
-            
-            <tag> Ubuntu </tag>
             
         </tags>
       
@@ -100,6 +100,33 @@
     
     
     <entry>
+      <title>【Truffle】一、Truffle的安装与部署</title>
+      <link href="/2023/10/27/%E3%80%90Truffle%E3%80%91%E4%B8%80%E3%80%81Truffle%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%83%A8%E7%BD%B2/"/>
+      <url>/2023/10/27/%E3%80%90Truffle%E3%80%91%E4%B8%80%E3%80%81Truffle%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%83%A8%E7%BD%B2/</url>
+      
+        <content type="html"><![CDATA[<h2 id="一、准备安装"><a href="#一、准备安装" class="headerlink" title="一、准备安装"></a>一、准备安装</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装truffle必须要提前配置Nodejs环境，关于Nodejs的配置，我在之前的文章中提到过版本管理方式，屡试不爽，移步这里查看： <a href="https://blog.csdn.net/naihe_fish/article/details/134027523?spm=1001.2014.3001.5501">【Linux】Ubuntu升级nodejs版本-CSDN博客</a></p><p>&nbsp; &nbsp; &nbsp; &nbsp; 需要注意的是，nodejs的版本在官方文档的要求是&nbsp;v8.9.4 或 之后的版本，然而在实际安装部署Truffle时，尽量建议大家选择更高的版本，避免出现下图的问题！</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407172010724.png"></p><h2 id="二、安装truffle"><a href="#二、安装truffle" class="headerlink" title="二、安装truffle"></a>二、安装truffle</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里我就以nodejs的20版本为例，开始安装Truffle</p><p>&nbsp; &nbsp; &nbsp; &nbsp; 确定环境准备完成后，执行下面这条命令安装Truffle</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g truffle</span><br></pre></td></tr></table></figure><p>&nbsp; &nbsp; &nbsp; &nbsp; 安装完成后&nbsp;，我们便可以创建工程啦</p><h2 id="三、创建-Truffle-项目工程"><a href="#三、创建-Truffle-项目工程" class="headerlink" title="三、创建 Truffle 项目工程"></a>三、创建 Truffle 项目工程</h2><h4 id="1-为-Truffle-项目创建新目录："><a href="#1-为-Truffle-项目创建新目录：" class="headerlink" title="1.为 Truffle 项目创建新目录："></a>1.为 Truffle 项目创建新目录：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir MetaCoin</span><br><span class="line">cd MetaCoin</span><br></pre></td></tr></table></figure><h4 id="2-下载-“unbox”-MetaCoin-box"><a href="#2-下载-“unbox”-MetaCoin-box" class="headerlink" title="2.下载 (“unbox”) MetaCoin box:"></a>2.下载 (“unbox”) MetaCoin box:</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truffle unbox metacoin</span><br></pre></td></tr></table></figure><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;这里是下载官方提供的一个合约工程，我们在后期熟练之后可以直接运行truffle init创建一个空的工程</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407172011374.png"></p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;这里如果下载失败了就直接运行此命令，下载的样例代码一样</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:<span class="comment">//github.com/truffle-box/metacoin-box.git</span></span><br></pre></td></tr></table></figure><p>在操作完成之后，就有这样的一个项目目录结构：</p><ul><li>contracts&#x2F;: 智能合约的存放目录  </li><li>migrations&#x2F;: 部署脚本目录  </li><li>test&#x2F;: 测试脚本目录  </li><li>truffle-config.js: Truffle配置文件</li></ul><h2 id="四、项目分析"><a href="#四、项目分析" class="headerlink" title="四、项目分析"></a>四、项目分析</h2><p>&nbsp; &nbsp; &nbsp; &nbsp; 我们下载的这个测试用例，已经是一个比较完整的项目体系了，接下来我们对这个项目结构进行分析</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407172012900.png"></p><ul><li>contracts：此目录存放所有需要测试的智能合约，一共有两个合约 </li><li>migrantions：此目录存放了一个部署合约脚本 </li><li>test：目录下存放了测试合约的脚本 </li><li>truffle-config.js：truffle的配置文件，可以修改一些基本信息，也可以引入第三方插件</li></ul><h2 id="五、测试合约"><a href="#五、测试合约" class="headerlink" title="五、测试合约"></a>五、测试合约</h2><p>&nbsp; &nbsp; &nbsp; &nbsp; 正常的流程为：truffle develop(启用测试网络)&nbsp;&#x3D;&gt; compile(编译合约) &#x3D;&gt; migrate(部署合约) &#x3D;&gt; test(测试合约)</p><p>&nbsp; &nbsp; &nbsp; &nbsp; 我们依次执行命令</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truffle develop</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407172014436.png"></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407172014437.png"></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">migrate</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407172014434.png"></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test </span><br></pre></td></tr></table></figure><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;直接运行test是执行所有测试脚本</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407172014435.png"></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;测试全部通过 ，至此，合约测试结束</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 区块链 </tag>
+            
+            <tag> Truffle </tag>
+            
+            <tag> solidity </tag>
+            
+            <tag> 智能合约 </tag>
+            
+            <tag> 测试 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Linux】解决缓存锁问题：无法获得锁 /var/lib/dpkg/lock-frontend</title>
       <link href="/2023/10/27/%E3%80%90Linux%E3%80%91%E8%A7%A3%E5%86%B3%E7%BC%93%E5%AD%98%E9%94%81%E9%97%AE%E9%A2%98%EF%BC%9A%E6%97%A0%E6%B3%95%E8%8E%B7%E5%BE%97%E9%94%81lock-frontend/"/>
       <url>/2023/10/27/%E3%80%90Linux%E3%80%91%E8%A7%A3%E5%86%B3%E7%BC%93%E5%AD%98%E9%94%81%E9%97%AE%E9%A2%98%EF%BC%9A%E6%97%A0%E6%B3%95%E8%8E%B7%E5%BE%97%E9%94%81lock-frontend/</url>
@@ -112,11 +139,11 @@
             
             <tag> Linux </tag>
             
+            <tag> Ubuntu </tag>
+            
             <tag> 运维 </tag>
             
             <tag> 服务器 </tag>
-            
-            <tag> Ubuntu </tag>
             
         </tags>
       
@@ -137,11 +164,11 @@
             
             <tag> Linux </tag>
             
+            <tag> Ubuntu </tag>
+            
             <tag> 运维 </tag>
             
             <tag> 服务器 </tag>
-            
-            <tag> Ubuntu </tag>
             
             <tag> node.js </tag>
             
@@ -162,13 +189,13 @@
       
         <tags>
             
-            <tag> Linux </tag>
-            
-            <tag> Ubuntu </tag>
-            
             <tag> FISCO BCOS </tag>
             
             <tag> 区块链 </tag>
+            
+            <tag> Linux </tag>
+            
+            <tag> Ubuntu </tag>
             
         </tags>
       
