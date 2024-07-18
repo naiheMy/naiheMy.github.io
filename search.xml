@@ -39,11 +39,11 @@
             
             <tag> Linux </tag>
             
+            <tag> Ubuntu </tag>
+            
             <tag> 运维 </tag>
             
             <tag> 服务器 </tag>
-            
-            <tag> Ubuntu </tag>
             
         </tags>
       
@@ -64,11 +64,11 @@
             
             <tag> Linux </tag>
             
+            <tag> Ubuntu </tag>
+            
             <tag> 运维 </tag>
             
             <tag> 服务器 </tag>
-            
-            <tag> Ubuntu </tag>
             
         </tags>
       
@@ -92,6 +92,33 @@
             <tag> 运维 </tag>
             
             <tag> 服务器 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Truffle】二、自定义合约测试</title>
+      <link href="/2023/10/29/%E3%80%90Truffle%E3%80%91%E4%BA%8C%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89%E5%90%88%E7%BA%A6%E6%B5%8B%E8%AF%95/"/>
+      <url>/2023/10/29/%E3%80%90Truffle%E3%80%91%E4%BA%8C%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89%E5%90%88%E7%BA%A6%E6%B5%8B%E8%AF%95/</url>
+      
+        <content type="html"><![CDATA[<h2 id="一、准备测试"><a href="#一、准备测试" class="headerlink" title="一、准备测试"></a>一、准备测试</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上期我们自己安装部署了truffle，并且体验了测试用例的整个测试流程，实际开发中，我们可以对自己的合约进行测试。</p><p>&nbsp; &nbsp; &nbsp; &nbsp; 我们首先先明白自定义合约测试需要几个文件</p><ul><li>合约文件：既然要测试合约，肯定要有合约的源码文件，以.sol后缀结尾 </li><li>部署文件：测试合约要写一份部署文件，用于在测试中部署合约，以.js后缀结尾 </li><li>测试文件：测试合约的流程文件，用于对合约的方法流程进行测试，以.js后缀结尾</li></ul><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;合约文件的话，我们写一个最简单的合约用来测试,合约中定义了一个名为”number” 的无符号整数变量,通过调用 store() 函数，可以将一个无符号整数值存储到 “number” 变量中。然后，可以通过调用 retrieve() 函数来获取存储在 “number” 变量中的值。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SPDX-License-Identifier: GPL-3.0</span></span><br><span class="line"></span><br><span class="line">pragma solidity &gt;=<span class="number">0.8</span><span class="number">.2</span> &lt;<span class="number">0.9</span><span class="number">.0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@title</span> Storage</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@dev</span> Store &amp; retrieve value in a variable</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@custom</span>:dev-run-script ./scripts/deploy_with_ethers.ts</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">contract Storage &#123;</span><br><span class="line"></span><br><span class="line">    uint256 number;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@dev</span> Store value in variable</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> num value to store</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    function <span class="title function_">store</span><span class="params">(uint256 num)</span> <span class="keyword">public</span> &#123;</span><br><span class="line">        number = num;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@dev</span> Return value </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> value of &#x27;number&#x27;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    function <span class="title function_">retrieve</span><span class="params">()</span> <span class="keyword">public</span> view <span class="title function_">returns</span> <span class="params">(uint256)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> number;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>&nbsp; &nbsp; &nbsp; &nbsp; 我们把它存放到工作目录中的contracts目录下，命名为storage.sol</p><p>&nbsp; &nbsp; &nbsp; &nbsp; 部署文件，固定的格式，可以参考之前下载的测试用例修改一下即可</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="variable">Storage</span> <span class="operator">=</span> artifacts.require(<span class="string">&quot;Storage&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span>.<span class="keyword">exports</span> = function (deployer) &#123;</span><br><span class="line">  deployer.deploy(Storage);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>&nbsp; &nbsp; &nbsp; &nbsp; 我们把它存放在migrations目录下，命名为1_deploy_contracts.js</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最后是测试文件，因为这个合约只有两个方法，所以我们两个方法都要进行测试，测试用例命名为Storage_test.js</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">var</span> <span class="variable">code</span> <span class="operator">=</span> <span class="string">&quot;60ca67ec-d345-407d-8df7-fa688e0bfd63&quot;</span></span><br><span class="line"><span class="type">const</span> <span class="variable">Storage</span> <span class="operator">=</span> artifacts.require(<span class="string">&quot;Storage&quot;</span>);</span><br><span class="line"></span><br><span class="line">contract(<span class="string">&quot;Storage&quot;</span>, (accounts) =&gt; &#123;</span><br><span class="line">  let storageInstance;</span><br><span class="line"></span><br><span class="line">  before(async () =&gt; &#123;</span><br><span class="line">    storageInstance = await Storage.deployed();</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">&quot;should store a value&quot;</span>, async () =&gt; &#123;</span><br><span class="line">    <span class="type">const</span> <span class="variable">newValue</span> <span class="operator">=</span> <span class="number">42</span>;</span><br><span class="line">    await storageInstance.store(newValue);</span><br><span class="line">    <span class="type">const</span> <span class="variable">storedValue</span> <span class="operator">=</span> await storageInstance.retrieve();</span><br><span class="line">    <span class="keyword">assert</span>.equal(storedValue, newValue, <span class="string">&quot;Value was not stored correctly&quot;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">&quot;should retrieve the stored value&quot;</span>, async () =&gt; &#123; </span><br><span class="line">    <span class="type">const</span> <span class="variable">storedValue</span> <span class="operator">=</span> await storageInstance.retrieve();</span><br><span class="line">    <span class="keyword">assert</span>.equal(storedValue, <span class="number">42</span>, <span class="string">&quot;Stored value is incorrect&quot;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最后的目录结构是这样的:</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407182123042.png"></p><h2 id="二、开始测试："><a href="#二、开始测试：" class="headerlink" title="二、开始测试："></a>二、开始测试：</h2><p>&nbsp; &nbsp; &nbsp; &nbsp; 和之前测试用例的测试方法一样，我们已经配置好了文件位置，现在可以开始测试啦</p><p>&nbsp; &nbsp; &nbsp; &nbsp; 测试流程为：truffle develop(启用测试网络)&nbsp;&#x3D;&gt; compile(编译合约) &#x3D;&gt; migrate(部署合约) &#x3D;&gt; test(测试合约)</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truffle develop</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407182125983.png"></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407182125974.png"></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">migrate</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407182126430.png"></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407182126858.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;测试成功，我们看到，测试文档里的两个方法都通过了，至此，我们完成了自定义合约测试的整体流程。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 区块链 </tag>
+            
+            <tag> Truffle </tag>
+            
+            <tag> solidity </tag>
+            
+            <tag> 智能合约 </tag>
+            
+            <tag> 测试 </tag>
             
         </tags>
       
@@ -139,11 +166,11 @@
             
             <tag> Linux </tag>
             
+            <tag> Ubuntu </tag>
+            
             <tag> 运维 </tag>
             
             <tag> 服务器 </tag>
-            
-            <tag> Ubuntu </tag>
             
         </tags>
       
@@ -164,11 +191,11 @@
             
             <tag> Linux </tag>
             
+            <tag> Ubuntu </tag>
+            
             <tag> 运维 </tag>
             
             <tag> 服务器 </tag>
-            
-            <tag> Ubuntu </tag>
             
             <tag> node.js </tag>
             
@@ -189,13 +216,13 @@
       
         <tags>
             
-            <tag> Linux </tag>
-            
-            <tag> Ubuntu </tag>
-            
             <tag> FISCO BCOS </tag>
             
             <tag> 区块链 </tag>
+            
+            <tag> Linux </tag>
+            
+            <tag> Ubuntu </tag>
             
         </tags>
       
