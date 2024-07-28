@@ -4,6 +4,29 @@
   
     
     <entry>
+      <title>【Linux】Ubuntu解决Release 文件已经过期问题</title>
+      <link href="/2024/07/28/%E3%80%90Linux%E3%80%91Ubuntu%E8%A7%A3%E5%86%B3Release%20%E6%96%87%E4%BB%B6%E5%B7%B2%E7%BB%8F%E8%BF%87%E6%9C%9F%E9%97%AE%E9%A2%98/"/>
+      <url>/2024/07/28/%E3%80%90Linux%E3%80%91Ubuntu%E8%A7%A3%E5%86%B3Release%20%E6%96%87%E4%BB%B6%E5%B7%B2%E7%BB%8F%E8%BF%87%E6%9C%9F%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<p>​今天学习的时候在执行update更新软件包时遇到了此问题：E: <a href="http://cn.archive.ubuntu.com/ubuntu/dists/jammy-updates/InRelease">http://cn.archive.ubuntu.com/ubuntu/dists/jammy-updates/InRelease</a> 的 Release 文件已经过期(已经过期了 247天 21小时 33分 15秒)。该仓库的更新将不会应用，如图</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407281839714.png" alt="image-20240728183851776"></p><p>​这个报错之前其实经常遇到，但是一直没有整合记录，这次特地整理记录一下</p><p>​这个错误提示表明系统中的软件源列表中有几个仓库的 Release 文件已经过期。Release 文件包含了软件包索引和版本信息，过期的 Release 文件意味着系统无法从这些仓库获取更新的软件包信息。其实也就是你的软件源过期了，需要更新一下，但是由于apt-get update命令会自动更新，于是问题就显得无从下手，直到我看见了这个。</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407281846423.png" alt="image-20240728184637250"></p><p>​现在这里的日期和时间都对着，但是问题发生时的时间为2023年，此时我才明白，是因为我虚拟机快照恢复的原因，导致时间回到了2023年，将自动设置日期和时间取消勾选再重新勾选后，再次执行apt-get update，发现软件源更新成功。</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202407281850608.png" alt="image-20240728185040427"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> 运维 </tag>
+            
+            <tag> 服务器 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Nginx】反向代理和负载均衡的配置</title>
       <link href="/2024/07/12/%E3%80%90Nginx%E3%80%91%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8C%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%9A%84%E9%85%8D%E7%BD%AE/"/>
       <url>/2024/07/12/%E3%80%90Nginx%E3%80%91%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8C%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%9A%84%E9%85%8D%E7%BD%AE/</url>
