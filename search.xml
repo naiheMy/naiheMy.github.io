@@ -229,6 +229,54 @@
     
     
     <entry>
+      <title>【FISCO-BCOS】 八、ubuntu配置Java环境</title>
+      <link href="/2023/05/08/%E3%80%90FISCO-BCOS%E3%80%91%20%E5%85%AB%E3%80%81ubuntu%E9%85%8D%E7%BD%AEJava%E7%8E%AF%E5%A2%83/"/>
+      <url>/2023/05/08/%E3%80%90FISCO-BCOS%E3%80%91%20%E5%85%AB%E3%80%81ubuntu%E9%85%8D%E7%BD%AEJava%E7%8E%AF%E5%A2%83/</url>
+      
+        <content type="html"><![CDATA[<p>ubuntu配置Java环境需根据自己的java版本号进行细节修改，本文以jdk11.0.18版本为例。</p><p>一、安装Java</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 安装默认Java版本(Java <span class="number">8</span>或以上)</span><br><span class="line">  sudo apt install -y <span class="keyword">default</span>-jdk</span><br><span class="line"> # 查询Java版本</span><br><span class="line">  java -version</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503191115109.png" alt="image-20250319111552064"></p><p>&nbsp;二、添加Java环境路径</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/profile</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503191116971.png" alt="image-20250319111608786"></p><p>&nbsp;粘贴内容如下：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/lib/jvm/java-<span class="number">1.11</span><span class="number">.0</span>-openjdk-amd64 # 此处为自己的jdk版本号</span><br><span class="line">export JRE_HOME=$JAVA_HOME/jre</span><br><span class="line">export CLASSPATH=$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH</span><br><span class="line">export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH</span><br></pre></td></tr></table></figure><p>三、环境设置生效</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503191116862.png" alt="image-20250319111630252"></p><p>四、检查java环境设置</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $JAVA_HOME</span><br></pre></td></tr></table></figure><p>ps：通过此法还可以查看java安装路径，但必须是环境配置成功的情况下才能使用。&nbsp;</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> Ubuntu </tag>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【FISCO-BCOS】 七、ubuntu安装并配置MySQL</title>
+      <link href="/2023/05/07/%E3%80%90FISCO-BCOS%E3%80%91%20%E4%B8%83%E3%80%81ubuntu%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEMySQL/"/>
+      <url>/2023/05/07/%E3%80%90FISCO-BCOS%E3%80%91%20%E4%B8%83%E3%80%81ubuntu%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEMySQL/</url>
+      
+        <content type="html"><![CDATA[<p>&nbsp;1.下载并解压mysql（版本号为：8.0.32）</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -y mysql-server mysql-client libmysqlclient-dev</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503191115986.png" alt="image-20250319111102924"></p><ol start="2"><li>查看密码</li></ol><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cat /etc/mysql/debian.cnf</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503191115344.png" alt="image-20250319111117223"></p><p>3.以上述账号和密码登录mysql&nbsp;</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u debian-sys-maint -p2l938pIxxWJScIhB</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503191115921.png" alt="image-20250319111220596"></p><p>4.设置root账户密码（密码以123456为例）</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED WITH mysql_native_password BY <span class="string">&#x27;123456&#x27;</span>;</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503191115624.png" alt="image-20250319111202375"></p><p>&nbsp;5.使用root用户登录mysql</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p123456</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503191115033.png" alt="image-20250319111154964"></p><p>&nbsp;登录成功~</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 运维 </tag>
+            
+            <tag> linux </tag>
+            
+            <tag> mysql </tag>
+            
+            <tag> ubuntu </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【FISCO-BCOS】 六、节点黑白名单操作</title>
       <link href="/2023/04/30/%E3%80%90FISCO-BCOS%E3%80%91%20%E5%85%AD%E3%80%81%E8%8A%82%E7%82%B9%E9%BB%91%E7%99%BD%E5%90%8D%E5%8D%95%E6%93%8D%E4%BD%9C/"/>
       <url>/2023/04/30/%E3%80%90FISCO-BCOS%E3%80%91%20%E5%85%AD%E3%80%81%E8%8A%82%E7%82%B9%E9%BB%91%E7%99%BD%E5%90%8D%E5%8D%95%E6%93%8D%E4%BD%9C/</url>
