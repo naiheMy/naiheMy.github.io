@@ -4,31 +4,6 @@
   
     
     <entry>
-      <title>【FISCO-BCOS】 二、配置控制台</title>
-      <link href="/2024/12/18/%E3%80%90FISCO%20BCOS%E3%80%91%E4%BA%8C%E3%80%81%E9%85%8D%E7%BD%AE%E6%8E%A7%E5%88%B6%E5%8F%B0/"/>
-      <url>/2024/12/18/%E3%80%90FISCO%20BCOS%E3%80%91%E4%BA%8C%E3%80%81%E9%85%8D%E7%BD%AE%E6%8E%A7%E5%88%B6%E5%8F%B0/</url>
-      
-        <content type="html"><![CDATA[<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>1.有一条搭建完成的链</p><p>2.保证网络通畅</p><h2 id="开始配置"><a href="#开始配置" class="headerlink" title="开始配置"></a>开始配置</h2><h3 id="1-安装依赖"><a href="#1-安装依赖" class="headerlink" title="1.安装依赖"></a>1.安装依赖</h3><p>​控制台的依赖为java，我们如果安装默认的java是11版本的，很适合后续继续使用，java的具体配置可以参考这篇文章：<a href="https://blog.csdn.net/naihe_fish/article/details/130568206">https://blog.csdn.net/naihe_fish/article/details/130568206</a></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install -y default-jdk</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202412201411083.png"></p><h3 id="2-下载运行控制台脚本"><a href="#2-下载运行控制台脚本" class="headerlink" title="2.下载运行控制台脚本"></a>2.下载运行控制台脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -LO https://github.com/</span><br><span class="line">FISCO-BCOS/console/releases/download/v2.9.2/download_console.sh &amp;&amp; bash download_console.sh</span><br></pre></td></tr></table></figure><p>​和之前的搭链一样，github下不上就去gitee下载，下载后记得解压</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -#LO https://gitee.com/FISCO-BCOS/console/raw/master-2.0/tools/download_console.sh &amp;&amp; bash download_console.sh</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202412192142159.png"></p><h3 id="3-拷贝控制台证书和配置文件"><a href="#3-拷贝控制台证书和配置文件" class="headerlink" title="3.拷贝控制台证书和配置文件"></a>3.拷贝控制台证书和配置文件</h3><p>​没什么好说的，注意文件路径和位置</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> -n console/conf/config-example.toml console/conf/config.toml</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> -r nodes/127.0.0.1/sdk/* console/conf/</span><br></pre></td></tr></table></figure><h3 id="4-启动使用控制台"><a href="#4-启动使用控制台" class="headerlink" title="4.启动使用控制台"></a>4.启动使用控制台</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/fisco/console &amp;&amp; bash start.sh</span><br></pre></td></tr></table></figure><p>​启动时需要注意，我们要启动之前搭建的节点才能启动成功，否则启动失败</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202412202014552.png"></p><p>​如上图所示，启动成功</p><h3 id="5-部署合约并调用"><a href="#5-部署合约并调用" class="headerlink" title="5.部署合约并调用"></a>5.部署合约并调用</h3><p>​控制台内置了几个简单的合约，我们可以部署helloworld合约测试控制台是否可以正常使用。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deploy HelloWorld</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202412202015332.png"></p><p>​部署成功的话，会返回此次交易hash和合约地址以及当前的账户地址，接下来我们调用此合约的set接口，设置字符串为“hi,blockchain”</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202412202018132.png"></p><p>​然后我们调用get验证合约当前储存的字符串，如图所示，正常输出刚才存储的字符串</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202412202019679.png"></p><p>至此，控制台的部署和测试调用已经结束了，更多的控制台命令可以参考官网：<a href="https://fisco-bcos-documentation.readthedocs.io/zh-cn/latest/docs/console/console_of_java_sdk.html#id19">控制台2.6+版本 — FISCO BCOS 2.0 v2.11.0 文档</a>，或者后续我会继续整合。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> FISCO BCOS </tag>
-            
-            <tag> 区块链 </tag>
-            
-            <tag> Linux </tag>
-            
-            <tag> Ubuntu </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>【Linux】Ubuntu解决Release 文件已经过期问题</title>
       <link href="/2024/07/28/%E3%80%90Linux%E3%80%91Ubuntu%E8%A7%A3%E5%86%B3Release%20%E6%96%87%E4%BB%B6%E5%B7%B2%E7%BB%8F%E8%BF%87%E6%9C%9F%E9%97%AE%E9%A2%98/"/>
       <url>/2024/07/28/%E3%80%90Linux%E3%80%91Ubuntu%E8%A7%A3%E5%86%B3Release%20%E6%96%87%E4%BB%B6%E5%B7%B2%E7%BB%8F%E8%BF%87%E6%9C%9F%E9%97%AE%E9%A2%98/</url>
@@ -246,6 +221,31 @@
             <tag> 服务器 </tag>
             
             <tag> node.js </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【FISCO-BCOS】 二、配置控制台</title>
+      <link href="/2023/04/20/%E3%80%90FISCO%20BCOS%E3%80%91%E4%BA%8C%E3%80%81%E9%85%8D%E7%BD%AE%E6%8E%A7%E5%88%B6%E5%8F%B0/"/>
+      <url>/2023/04/20/%E3%80%90FISCO%20BCOS%E3%80%91%E4%BA%8C%E3%80%81%E9%85%8D%E7%BD%AE%E6%8E%A7%E5%88%B6%E5%8F%B0/</url>
+      
+        <content type="html"><![CDATA[<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>1.有一条搭建完成的链</p><p>2.保证网络通畅</p><h2 id="开始配置"><a href="#开始配置" class="headerlink" title="开始配置"></a>开始配置</h2><h3 id="1-安装依赖"><a href="#1-安装依赖" class="headerlink" title="1.安装依赖"></a>1.安装依赖</h3><p>​控制台的依赖为java，我们如果安装默认的java是11版本的，很适合后续继续使用，java的具体配置可以参考这篇文章：<a href="https://blog.csdn.net/naihe_fish/article/details/130568206">https://blog.csdn.net/naihe_fish/article/details/130568206</a></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install -y default-jdk</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202412201411083.png"></p><h3 id="2-下载运行控制台脚本"><a href="#2-下载运行控制台脚本" class="headerlink" title="2.下载运行控制台脚本"></a>2.下载运行控制台脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -LO https://github.com/</span><br><span class="line">FISCO-BCOS/console/releases/download/v2.9.2/download_console.sh &amp;&amp; bash download_console.sh</span><br></pre></td></tr></table></figure><p>​和之前的搭链一样，github下不上就去gitee下载，下载后记得解压</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -#LO https://gitee.com/FISCO-BCOS/console/raw/master-2.0/tools/download_console.sh &amp;&amp; bash download_console.sh</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202412192142159.png"></p><h3 id="3-拷贝控制台证书和配置文件"><a href="#3-拷贝控制台证书和配置文件" class="headerlink" title="3.拷贝控制台证书和配置文件"></a>3.拷贝控制台证书和配置文件</h3><p>​没什么好说的，注意文件路径和位置</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> -n console/conf/config-example.toml console/conf/config.toml</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> -r nodes/127.0.0.1/sdk/* console/conf/</span><br></pre></td></tr></table></figure><h3 id="4-启动使用控制台"><a href="#4-启动使用控制台" class="headerlink" title="4.启动使用控制台"></a>4.启动使用控制台</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/fisco/console &amp;&amp; bash start.sh</span><br></pre></td></tr></table></figure><p>​启动时需要注意，我们要启动之前搭建的节点才能启动成功，否则启动失败</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202412202014552.png"></p><p>​如上图所示，启动成功</p><h3 id="5-部署合约并调用"><a href="#5-部署合约并调用" class="headerlink" title="5.部署合约并调用"></a>5.部署合约并调用</h3><p>​控制台内置了几个简单的合约，我们可以部署helloworld合约测试控制台是否可以正常使用。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deploy HelloWorld</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202412202015332.png"></p><p>​部署成功的话，会返回此次交易hash和合约地址以及当前的账户地址，接下来我们调用此合约的set接口，设置字符串为“hi,blockchain”</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202412202018132.png"></p><p>​然后我们调用get验证合约当前储存的字符串，如图所示，正常输出刚才存储的字符串</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202412202019679.png"></p><p>至此，控制台的部署和测试调用已经结束了，更多的控制台命令可以参考官网：<a href="https://fisco-bcos-documentation.readthedocs.io/zh-cn/latest/docs/console/console_of_java_sdk.html#id19">控制台2.6+版本 — FISCO BCOS 2.0 v2.11.0 文档</a>，或者后续我会继续整合。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> FISCO BCOS </tag>
+            
+            <tag> 区块链 </tag>
+            
+            <tag> Linux </tag>
+            
+            <tag> Ubuntu </tag>
             
         </tags>
       
