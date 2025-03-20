@@ -229,6 +229,31 @@
     
     
     <entry>
+      <title>【FISCO-BCOS】九、节点前置搭建</title>
+      <link href="/2023/07/26/%E3%80%90FISCO-BCOS%E3%80%91%E4%B9%9D%E3%80%81%E8%8A%82%E7%82%B9%E5%89%8D%E7%BD%AE%E6%90%AD%E5%BB%BA/"/>
+      <url>/2023/07/26/%E3%80%90FISCO-BCOS%E3%80%91%E4%B9%9D%E3%80%81%E8%8A%82%E7%82%B9%E5%89%8D%E7%BD%AE%E6%90%AD%E5%BB%BA/</url>
+      
+        <content type="html"><![CDATA[<p><strong>目录</strong></p><p> <a href="#%E4%B8%80%E3%80%81%E4%B8%8B%E8%BD%BDwebase-front%E5%AE%89%E8%A3%85%E5%8C%85">一、下载webase-front安装包</a></p><p> <a href="#%E4%BA%8C%E3%80%81%E8%A7%A3%E5%8E%8B%E8%BF%9B%E5%85%A5%E6%96%87%E4%BB%B6">二、解压进入文件</a></p><p> <a href="#%E4%B8%89%E3%80%81%E6%8B%B7%E8%B4%9Dsdk%E8%AF%81%E4%B9%A6%E6%96%87%E4%BB%B6%EF%BC%88build_chain%E7%9A%84%E6%97%B6%E5%80%99%E7%94%9F%E6%88%90%E7%9A%84%EF%BC%89">三、拷贝sdk证书文件（build_chain的时候生成的）</a></p><p> <a href="#%C2%A0%E5%9B%9B%E3%80%81%E8%BF%9B%E5%85%A5webase-front%EF%BC%8C%E5%90%AF%E5%8A%A8">四、进入webase-front，启动</a></p><p> <a href="#%E4%BA%94%E3%80%81%E7%8A%B6%E6%80%81%E6%A3%80%E6%9F%A5">五、状态检查</a></p><p> <a href="#1.%E6%A3%80%E6%9F%A5%E8%8A%82%E7%82%B9%E8%BF%9B%E7%A8%8B">1.检查节点进程</a></p><p> <a href="#%C2%A02.%E6%A3%80%E6%9F%A5%E6%9C%8D%E5%8A%A1%E6%97%A5%E5%BF%97">2.检查服务日志</a></p><p> <a href="#%C2%A0%E5%85%AD%E3%80%81%E8%AE%BF%E9%97%AE">六、访问</a></p><p>在进行节点前置搭建前，必须确保java环境配置成功，详见上一篇文档： <a href="https://blog.csdn.net/naihe_fish/article/details/130568206?spm=1001.2014.3001.5501">FISCO-BCOS 八、ubuntu配置Java环境_奈何不吃鱼的博客-CSDN博客</a></p><p>使用如下命令查看java环境是否配置成功</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $JAVA_HOME</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503201056061.png" alt="image-20250320105430562"></p><p>输出上图则表示成功~&nbsp;</p><h2 id="一、下载webase-front安装包"><a href="#一、下载webase-front安装包" class="headerlink" title="一、下载webase-front安装包"></a>一、下载webase-front安装包</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:<span class="comment">//osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.5/webase-front.zip</span></span><br></pre></td></tr></table></figure><h2 id="二、解压进入文件"><a href="#二、解压进入文件" class="headerlink" title="二、解压进入文件"></a>二、解压进入文件</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unzip webase-front.zip</span><br><span class="line">cd webase-front</span><br></pre></td></tr></table></figure><h2 id="三、拷贝sdk证书文件（build-chain的时候生成的）"><a href="#三、拷贝sdk证书文件（build-chain的时候生成的）" class="headerlink" title="三、拷贝sdk证书文件（build_chain的时候生成的）"></a>三、拷贝sdk证书文件（build_chain的时候生成的）</h2><p>注：进行此步骤前需要确定已建链的sdk证书文件的位置，这里讲节点前置的安装包安装在了fisco目录下，故拷贝命令为：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -r nodes/<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>/sdk<span class="comment">/* webase-front/conf/</span></span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503201056795.png" alt="image-20250320105448351"></p><h2 id="四、进入webase-front，启动"><a href="#四、进入webase-front，启动" class="headerlink" title="四、进入webase-front，启动"></a>四、进入webase-front，启动</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash webase-front/start.sh</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503201055856.png" alt="image-20250320105502609"></p><p>&nbsp;上图所示，成功~</p><h2 id="五、状态检查"><a href="#五、状态检查" class="headerlink" title="五、状态检查"></a>五、状态检查</h2><h3 id="1-检查节点进程"><a href="#1-检查节点进程" class="headerlink" title="1.检查节点进程"></a>1.检查节点进程</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep node</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503201055894.png" alt="image-20250320105512185"></p><h3 id="2-检查服务日志"><a href="#2-检查服务日志" class="headerlink" title="2.检查服务日志"></a>2.检查服务日志</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -B <span class="number">3</span> <span class="string">&quot;main run success&quot;</span> log/WeBASE-Front.log</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503201055653.png" alt="image-20250320105523361"></p><h2 id="六、访问"><a href="#六、访问" class="headerlink" title="六、访问"></a>六、访问</h2><p><a href="http://localhost:5002/WeBASE-Front">http://localhost:5002/WeBASE-Front</a></p><p>注意：节点前置的网址与之后的一键部署网址不同，注意区分！<img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503201055615.png" alt="image-20250320105534536">至此，节点前置搭建完成~</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> FISCO BCOS </tag>
+            
+            <tag> 区块链 </tag>
+            
+            <tag> Linux </tag>
+            
+            <tag> Ubuntu </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【FISCO-BCOS】 八、ubuntu配置Java环境</title>
       <link href="/2023/05/08/%E3%80%90FISCO-BCOS%E3%80%91%20%E5%85%AB%E3%80%81ubuntu%E9%85%8D%E7%BD%AEJava%E7%8E%AF%E5%A2%83/"/>
       <url>/2023/05/08/%E3%80%90FISCO-BCOS%E3%80%91%20%E5%85%AB%E3%80%81ubuntu%E9%85%8D%E7%BD%AEJava%E7%8E%AF%E5%A2%83/</url>
