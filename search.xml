@@ -4,19 +4,6 @@
   
     
     <entry>
-      <title></title>
-      <link href="/2025/03/20/%E3%80%90FISCO-BCOS%E3%80%91%E5%8D%81%E3%80%81ubuntu%E5%AE%89%E8%A3%85pymysql/"/>
-      <url>/2025/03/20/%E3%80%90FISCO-BCOS%E3%80%91%E5%8D%81%E3%80%81ubuntu%E5%AE%89%E8%A3%85pymysql/</url>
-      
-        <content type="html"><![CDATA[<hr><p>title:   【FISCO-BCOS】十、ubuntu安装pymysql<br>date:   2023-05-19 09:34:16<br>author:  ‘naihe’<br>cover: <a href="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202412192105414.png">https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202412192105414.png</a><br>catalog:   false<br>tags:</p><ul><li>FISCO BCOS</li><li>区块链</li><li>Linux</li><li>Ubuntu<br>​—</li></ul><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;进行一键部署前必须完成对pymysql的部署，这里列举了一些实际部署可能会遇到的问题，以便大家参考交流。</p><p>Ubuntu安装pymysql：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y python3-pip</span><br><span class="line">sudo pip3 install PyMySQL</span><br></pre></td></tr></table></figure><p>问题：&nbsp;</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503201105336.png" alt="image-20250320110424625"></p><p>&nbsp;E: 无法下载 <a href="http://security.ubuntu.com/ubuntu/pool/main/l/linux/linux-libc-dev_5.15.0-71.78_amd64.deb">http://security.ubuntu.com/ubuntu/pool/main/l/linux/linux-libc-dev_5.15.0-71.78_amd64.deb</a> &nbsp;404 &nbsp;Not Found [IP: 91.189.91.38 80] E: 有几个软件包无法下载，要不运行 apt-get update 或者加上 –fix-missing 的选项再试试？ sudo: pip3：找不到命令</p><p>根据提示运行 apt-get update 命令：</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503201105735.png" alt="image-20250320110433837"></p><p>诶嘿，要sudo哦</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503201105147.png" alt="image-20250320110447669">&nbsp;</p><p>完成后使用 sudo pip3 install PyMySQL 命令继续安装</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503201105214.png" alt="image-20250320110509279"></p><p>安装成功~&nbsp;</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>【Linux】Ubuntu解决Release 文件已经过期问题</title>
       <link href="/2024/07/28/%E3%80%90Linux%E3%80%91Ubuntu%E8%A7%A3%E5%86%B3Release%20%E6%96%87%E4%BB%B6%E5%B7%B2%E7%BB%8F%E8%BF%87%E6%9C%9F%E9%97%AE%E9%A2%98/"/>
       <url>/2024/07/28/%E3%80%90Linux%E3%80%91Ubuntu%E8%A7%A3%E5%86%B3Release%20%E6%96%87%E4%BB%B6%E5%B7%B2%E7%BB%8F%E8%BF%87%E6%9C%9F%E9%97%AE%E9%A2%98/</url>
@@ -267,6 +254,31 @@
     
     
     <entry>
+      <title>【FISCO-BCOS】十、ubuntu安装pymysql</title>
+      <link href="/2023/05/08/%E3%80%90FISCO-BCOS%E3%80%91%E5%8D%81%E3%80%81ubuntu%E5%AE%89%E8%A3%85pymysql/"/>
+      <url>/2023/05/08/%E3%80%90FISCO-BCOS%E3%80%91%E5%8D%81%E3%80%81ubuntu%E5%AE%89%E8%A3%85pymysql/</url>
+      
+        <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;进行一键部署前必须完成对pymysql的部署，这里列举了一些实际部署可能会遇到的问题，以便大家参考交流。</p><p>Ubuntu安装pymysql：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y python3-pip</span><br><span class="line">sudo pip3 install PyMySQL</span><br></pre></td></tr></table></figure><p>问题：&nbsp;</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503201105336.png" alt="image-20250320110424625"></p><p>&nbsp;E: 无法下载 <a href="http://security.ubuntu.com/ubuntu/pool/main/l/linux/linux-libc-dev_5.15.0-71.78_amd64.deb">http://security.ubuntu.com/ubuntu/pool/main/l/linux/linux-libc-dev_5.15.0-71.78_amd64.deb</a> &nbsp;404 &nbsp;Not Found [IP: 91.189.91.38 80] E: 有几个软件包无法下载，要不运行 apt-get update 或者加上 –fix-missing 的选项再试试？ sudo: pip3：找不到命令</p><p>根据提示运行 apt-get update 命令：</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503201105735.png" alt="image-20250320110433837"></p><p>诶嘿，要sudo哦</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503201105147.png" alt="image-20250320110447669">&nbsp;</p><p>完成后使用 sudo pip3 install PyMySQL 命令继续安装</p><p><img src="https://cdn.jsdelivr.net/gh/naiheMy/my_imgs@img/img/202503201105214.png" alt="image-20250320110509279"></p><p>安装成功~&nbsp;</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> FISCO BCOS </tag>
+            
+            <tag> 区块链 </tag>
+            
+            <tag> Linux </tag>
+            
+            <tag> Ubuntu </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【FISCO-BCOS】 八、ubuntu配置Java环境</title>
       <link href="/2023/05/08/%E3%80%90FISCO-BCOS%E3%80%91%20%E5%85%AB%E3%80%81ubuntu%E9%85%8D%E7%BD%AEJava%E7%8E%AF%E5%A2%83/"/>
       <url>/2023/05/08/%E3%80%90FISCO-BCOS%E3%80%91%20%E5%85%AB%E3%80%81ubuntu%E9%85%8D%E7%BD%AEJava%E7%8E%AF%E5%A2%83/</url>
@@ -300,13 +312,13 @@
       
         <tags>
             
-            <tag> 运维 </tag>
-            
             <tag> linux </tag>
             
             <tag> mysql </tag>
             
             <tag> ubuntu </tag>
+            
+            <tag> 运维 </tag>
             
         </tags>
       
